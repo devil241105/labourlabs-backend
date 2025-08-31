@@ -1,4 +1,4 @@
-import Lead from "../models/leads.model";
+import Lead from "../models/leads.model.js";
 
 const createLead = async (req, res) => {
     const { name, email, companyName, message } = req.body;
