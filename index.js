@@ -6,6 +6,14 @@ import connectDB from './config/connectDB.js';
 import leadRoutes from './routes/leads.routes.js';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
+import rateLimit from "express-rate-limit";
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 5, // max 5 requests per IP in that window
+  message: { message: "Too many requests, please try again later." }
+});
+
 
 dotenv.config();
 
@@ -18,6 +26,7 @@ app.use(cors({
   origin: "http://localhost:5173",
   credentials: true 
 }));
+app.use(limiter);
 
 
 // Connect to MongoDB
